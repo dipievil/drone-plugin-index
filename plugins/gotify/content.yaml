@@ -1,15 +1,15 @@
 title: Gotify
 author: dipievil
 tags:
+  - Deploy
+  - Publish
   - notifications
-  - chat
-  - gotify
 repo: https://github.com/dipievil/drone-gotify
 image: https://hub.docker.com/r/dipievil/drone-gotify
 license: Apache License 2.0
+logo: gotify.svg
 readme: https://github.com/dipievil/drone-gotify/blob/main/README.md
-description: |
-  The Gotify plugin posts build status messages to your Gotify server.
+description: A Gotify plugin to send messages to your Gotify server.
 example: |
   kind: pipeline
   name: default
