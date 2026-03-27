@@ -1,0 +1,70 @@
+title: Gotify
+author: dipievil
+tags:
+  - notifications
+  - chat
+  - gotify
+repo: https://github.com/dipievil/drone-gotify
+image: https://hub.docker.com/r/dipievil/drone-gotify
+license: Apache License 2.0
+readme: https://github.com/dipievil/drone-gotify/blob/main/README.md
+description: |
+  The Gotify plugin posts build status messages to your Gotify server.
+example: |
+  kind: pipeline
+  name: default
+
+  steps:
+  - name: send-gotify-notification
+    image: dipievil/drone-gotify
+    settings:
+      url: https://gotify.example.com
+      token:
+        from_secret: gotify_token
+      title: "Drone Build #{{build.number}}"
+      message: "The build {{build.status}} on branch {{commit.branch}}."
+      markdown: true
+      click_url: "{{build.link}}"
+properties:
+  url:
+    type: string
+    defaultValue: ""
+    description: URL for Gotify server
+    secret: false
+    required: true
+  token:
+    type: string
+    defaultValue: ""
+    description: App token to authenticate with Gotify
+    secret: true
+    required: true
+  title:
+    type: string
+    defaultValue: "Drone CI"
+    description: Title for the message. Evaluates template variables.
+    secret: false
+    required: false
+  message:
+    type: string
+    defaultValue: ""
+    description: Body for the message. Evaluates template variables. By default it generates a standard notification summary.
+    secret: false
+    required: false
+  priority:
+    type: number
+    defaultValue: 5
+    description: Priority of the message, defaults to 5.
+    secret: false
+    required: false
+  markdown:
+    type: boolean
+    defaultValue: false
+    description: Set to true to include the client display extra indicating the message is formatted as Markdown text.
+    secret: false
+    required: false
+  click_url:
+    type: string
+    defaultValue: ""
+    description: Provides a click url within the client notification extras map.
+    secret: false
+    required: false
